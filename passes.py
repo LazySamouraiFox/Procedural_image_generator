@@ -1,0 +1,1 @@
+#### Pipeline manager that apply the rules along the generations ####
