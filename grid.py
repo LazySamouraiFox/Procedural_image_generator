@@ -18,30 +18,30 @@ class Grid:
     def in_bounds(self, x, y):
         return (0 <= x < self.width and 0 <= y < self.height)
         
-    def get_neighbords(self, x, y):    
+    def get_neighbors(self, x, y):    
         """
-        return a list of the neighbords pixels starting from the left pixel going anti trigonometric
+        return a list of the neighbors pixels starting from the left pixel going anti trigonometric
         """   
          
-        neighbords = [None for i in range(8)]
+        neighbors = [None for i in range(8)]
         if self.in_bounds(x-1, y):
-            neighbords[0]=self.pixels[y][x-1]
+            neighbors[0]=self.pixels[y][x-1]
         if self.in_bounds(x-1, y+1):
-            neighbords[1]=self.pixels[y+1][x-1]
+            neighbors[1]=self.pixels[y+1][x-1]
         if self.in_bounds(x, y+1):
-            neighbords[2]=self.pixels[y+1][x]
+            neighbors[2]=self.pixels[y+1][x]
         if self.in_bounds(x+1, y+1):
-            neighbords[3]=self.pixels[y+1][x+1]
+            neighbors[3]=self.pixels[y+1][x+1]
         if self.in_bounds(x+1, y):
-            neighbords[4]=self.pixels[y][x+1]
+            neighbors[4]=self.pixels[y][x+1]
         if self.in_bounds(x+1, y-1):
-            neighbords[5]=self.pixels[y-1][x+1]
+            neighbors[5]=self.pixels[y-1][x+1]
         if self.in_bounds(x, y-1):
-            neighbords[6]=self.pixels[y-1][x]
+            neighbors[6]=self.pixels[y-1][x]
         if self.in_bounds(x-1, y-1):
-            neighbords[7]=self.pixels[y-1][x-1]
+            neighbors[7]=self.pixels[y-1][x-1]
         
-        return neighbords
+        return neighbors
 
     def random_fill(self, palette):
         for y in range(self.height):

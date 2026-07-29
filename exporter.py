@@ -15,4 +15,5 @@ def save_png(grid, palette, filename, pixel_size=1):
     if pixel_size > 1:
         image = image.resize( (grid.width * pixel_size, grid.height * pixel_size) , Image.Resampling.NEAREST)
 
-    image.save("/home/colin/Pictures/Generated/Test_01/" + filename)
+    #image.save("/home/colin/Pictures/Generated/Test_01/" + filename)
+    image.save("C:/Colin/Scripts/Procedural_image_generator/Images/Test_01/" + filename)
