@@ -24,4 +24,4 @@ class RulePass(Pass):
                     new.set_pixel(x, y, new_color)
             old, new = new, old
         
-        grid = old
+        return old

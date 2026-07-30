@@ -4,7 +4,7 @@ from palette import Palette
 from grid import Grid
 from exporter import save_png
 from passes import RulePass
-from rules.clusters import plus_sign_clusters, multiply_sign_clusters
+from rules.clusters import ClusterRules
 
 
 WIDTH = 32
@@ -16,9 +16,10 @@ grid = Grid(WIDTH, HEIGHT)
 
 grid.random_fill(palette)
 
-pipeline = [RulePass(plus_sign_clusters, iterations=2), RulePass(multiply_sign_clusters, iterations=2)]
+pipeline = [RulePass(ClusterRules().plus_clusters, iterations=5),
+            RulePass(ClusterRules().multiply_clusters, iterations=5)]
 
-for n in pipeline:
-    n.apply(grid)
+for rule in pipeline:
+    grid = rule.apply(grid)
 
 save_png(grid,palette,"test.png",pixel_size=8)
