@@ -2,9 +2,10 @@
 
 from numpy import zeros as np_zeros
 from numpy import full as np_full
-from numpy import unique as np_unique
+from numpy import where as np_where
+from numpy import max as np_max
 from numpy.random import choice as np_choice
-from random import randrange as rd_randrange
+from random import randint as rd_randint
 
 class Grid:
 
@@ -36,13 +37,14 @@ class Grid:
                 nx, ny = x + dx, y + dy
                 if self.in_bounds(nx, ny):
                     neighbors[radius + dy][radius + dx] = self.pixels[ny][nx]
-                    
+        neighbors[radius][radius]=None
+        
         return neighbors
 
     def random_fill(self, palette):
         for y in range(self.height):
             for x in range(self.width):
-                color_id = rd_randrange(palette.size())    #randrange(start(default=0), stop[, step])
+                color_id = rd_randint(0, palette.size()-1)
                 self.set_pixel(x, y, color_id)
 
     def clone(self):
@@ -57,9 +59,10 @@ class Grid:
         neighbors = self.get_neighbors(x, y, radius)
         c=0
         
-        for current_color in neighbors:
-            if current_color==color:
-                c+=1
+        for line in neighbors:
+            for current_color in line:
+                if current_color==color:
+                    c+=1
         
         return c
     
@@ -70,13 +73,14 @@ class Grid:
         """        
         
         neighbors = self.get_neighbors(x, y, radius)
-        neighbors_color = np_zeros(palette.size())
+        neighbors_color = np_zeros(palette.size(), dtype=int)
         
-        for current_color in neighbors:
-            neighbors_color[current_color]+=1
-        
-        values, counts = np_unique(neighbors_color, return_counts=True)
-        most_frequent_values = values[counts == counts.max()]
+        for line in neighbors:
+            for current_color in line:
+                if current_color is not None:
+                    neighbors_color[current_color]+=1
+
+        most_frequent_values = np_where(neighbors_color == np_max(neighbors_color))[0]
         
         return most_frequent_values
 

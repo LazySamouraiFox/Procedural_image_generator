@@ -10,7 +10,7 @@ class RulePass(Pass):
         self.iterations = iterations
         self.rule = rule
 
-    def apply(self, grid):
+    def apply(self, grid, palette):
         
         old = grid
         new = grid.clone()
@@ -20,7 +20,7 @@ class RulePass(Pass):
         for _ in range(self.iterations):
             for y in range(height):
                 for x in range(width):
-                    new_color = self.rule(x, y, old)                        
+                    new_color = self.rule(x, y, old, palette)                        
                     new.set_pixel(x, y, new_color)
             old, new = new, old
         

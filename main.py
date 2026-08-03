@@ -17,9 +17,10 @@ grid = Grid(WIDTH, HEIGHT)
 grid.random_fill(palette)
 
 pipeline = [RulePass(ClusterRules().plus_clusters, iterations=5),
-            RulePass(ClusterRules().multiply_clusters, iterations=5)]
+            RulePass(ClusterRules().multiply_clusters, iterations=5),
+            RulePass(ClusterRules().grow_clusters, iterations=5)]
 
 for rule in pipeline:
-    grid = rule.apply(grid)
+    grid = rule.apply(grid, palette)
 
-save_png(grid,palette,"test.png",pixel_size=8)
+save_png(grid,palette,"test_3_09.png",pixel_size=8)

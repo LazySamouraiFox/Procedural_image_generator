@@ -1,11 +1,13 @@
 #### Clustering rules ####
 
+from numpy.random import choice as np_choice
+
 class ClusterRules:
     
     def __init__(self, range=1):
         self.range = range
     
-    def plus_clusters(self, x, y, grid):
+    def plus_clusters(self, x, y, grid, palette):
         
         r = self.range
         neighbors = grid.get_neighbors(x, y, r)
@@ -25,7 +27,7 @@ class ClusterRules:
                         
         return color
 
-    def multiply_clusters(self, x, y, grid):
+    def multiply_clusters(self, x, y, grid, palette):
         
         r = self.range
         neighbors = grid.get_neighbors(x, y, r)
@@ -44,3 +46,13 @@ class ClusterRules:
                         
         return color
     
+    def grow_clusters(self, x, y, grid, palette):
+        
+        thresh = 4
+        r = self.range
+        color = grid.get_pixel(x, y)
+        major_color = np_choice(grid.majority_color(x, y, palette, r))
+        if grid.count_neighbors(x, y, major_color, r) >= thresh:
+            color=major_color
+        
+        return color
