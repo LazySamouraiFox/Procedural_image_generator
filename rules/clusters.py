@@ -48,7 +48,7 @@ class ClusterRules:
     
     def grow_clusters(self, x, y, grid, palette):
         
-        thresh = 4
+        thresh = 3
         r = self.range
         color = grid.get_pixel(x, y)
         major_color = np_choice(grid.majority_color(x, y, palette, r))

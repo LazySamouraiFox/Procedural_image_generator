@@ -87,3 +87,18 @@ class Grid:
     def random_neighbor(self, x, y, radius=1):
         neighbors=self.get_neighbors(x, y, radius)
         return np_choice(neighbors)
+
+
+class Area(Grid):
+
+    def __init__(self, width, height, shape="square", location="center"):
+        self.width = width
+        self.height = height
+        self.location = location
+                
+        if shape is "square":
+            self.pixels = np_full((height, width), None)
+        elif shape is "random":
+            ...
+        else:
+            print("Shape incorrect, try 'square' or 'random'")

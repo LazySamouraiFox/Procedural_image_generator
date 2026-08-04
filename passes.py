@@ -4,7 +4,7 @@ class Pass:
     def apply(self, grid):
         raise NotImplementedError
 
-class RulePass(Pass):
+class PixelRulePass(Pass):
 
     def __init__(self, rule, iterations=1):
         self.iterations = iterations
@@ -25,3 +25,9 @@ class RulePass(Pass):
             old, new = new, old
         
         return old
+    
+# class AreaRulePass(Pass):
+    
+#     def __init__(self, rule, iterations=1, area):
+#         self.iterations = iterations
+#         self.rule = rule
